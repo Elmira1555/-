@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>График сотрудников — 5/2</title>
+<script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=ghUig8-n9sfzoFI2-S3azBmZEJ2INisQ4V0c5v9BuSHyZzDMXhiLODBBKdtkjT592TPSjC2vvljSdKKFs-4UA6IMhGu3yfSaay20mSNO2WmHTcKSx3OiKpPffO8wIhG8OdvRaN8Nkp8jsWat6vBqOlLCPdwBUCf-SuOZ7NeF0RQ36gT5nuV0dnwke1GI5YrpcEkVm95ndmvr-qnjrMDxBn3fRhRaqHLpNrdnLzo0PQ8wprP9WlcTqtjOA-tpF6Xgi0y_x_cc9A6Ts56Q_G-rERSghhYqHfNN7hXTnoYAeWS3k_avQH1jRm5I6kleGl02eL2ZqOAod-xxK8mhcASlAEhlw0bI8JmrLeOu_222tIcbFv9RsQAWuS8J17niNz8zdaNC-OH2HtXTOCx1BDFCizrq-EAz6WHRkpxFGNnUkdbt6mNiPxPr3NWcRLMMN7Q2" charset="UTF-8"></script><style>
+:root{--bg:#f5f7fb;--card:#fff;--line:#dfe5ee;--text:#182230;--muted:#667085;--accent:#2563eb;--green:#15803d;--orange:#c2410c;--purple:#7e22ce;--red:#b91c1c}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:#0f172a;color:#fff;padding:18px 24px;position:sticky;top:0;z-index:5}header h1{margin:0;font-size:22px}header p{margin:5px 0 0;color:#cbd5e1;font-size:13px}
+.wrap{max-width:1500px;margin:auto;padding:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 3px 12px #0f172a0a;padding:16px;margin-bottom:16px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:end}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;color:var(--muted);font-weight:600}
+select,input,button{font:inherit}select,input[type=text],input[type=number]{border:1px solid #cbd5e1;border-radius:9px;padding:9px 10px;background:#fff}
+button{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:600}.primary{background:var(--accent);color:#fff}.secondary{background:#e2e8f0;color:#0f172a}.danger{background:#fee2e2;color:#991b1b}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.stat{padding:10px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;font-size:13px}.stat b{font-size:18px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:12px}.badge{padding:5px 8px;border-radius:7px;font-weight:700}.s8{background:#dbeafe;color:#1d4ed8}.s9{background:#dcfce7;color:#166534}.s12{background:#fef3c7;color:#92400e}.off{background:#f1f5f9;color:#64748b}.vac{background:#fce7f3;color:#9d174d}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}.schedule{border-collapse:separate;border-spacing:0;width:max-content;min-width:100%}.schedule th,.schedule td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:6px;text-align:center;white-space:nowrap}.schedule th{background:#f8fafc;position:sticky;top:0;z-index:2;font-size:12px}.schedule th.name,.schedule td.name{position:sticky;left:0;background:#fff;z-index:3;text-align:left;min-width:180px}.schedule th.num,.schedule td.num{position:sticky;left:0;z-index:4;background:#f8fafc;width:45px}.schedule th.name{left:45px}.schedule td.name{left:45px}.weekend{background:#f8fafc!important;color:#94a3b8}.cell{min-width:78px;height:48px;border-radius:7px;padding:5px;cursor:pointer;font-size:11px}.cell strong{display:block;font-size:13px}.cell small{color:inherit;opacity:.8}.cell:hover{outline:2px solid var(--accent)}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.section-title h2{font-size:17px;margin:0}.hint{color:var(--muted);font-size:12px}
+.form-grid{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px}.employee-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.emp{border:1px solid var(--line);padding:8px 10px;border-radius:9px;background:#fff;display:flex;gap:8px;align-items:center}.emp button{padding:3px 7px;background:#fee2e2;color:#991b1b}
+.errors{padding:10px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12px}.ok{padding:10px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px}
+dialog{border:0;border-radius:14px;padding:0;width:min(520px,92vw);box-shadow:0 20px 60px #0003}dialog::backdrop{background:#0f172a99}.modal{padding:18px}.modal h3{margin-top:0}.shift-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.shift-btn{border:1px solid var(--line);background:#fff;padding:12px;text-align:left;border-radius:10px}.shift-btn:hover{border-color:var(--accent)}
+.small{font-size:11px;color:var(--muted)}footer{color:var(--muted);font-size:12px;padding:8px 0 30px}
+@media(max-width:800px){.form-grid{grid-template-columns:1fr 1fr}.schedule th.name,.schedule td.name{min-width:145px}}
+</style>
+</head>
+<body>
+<header><h1>График сотрудников · 5/2</h1><p>Месячное планирование операторов и старших сотрудников с контролем покрытия 08:00–21:00.</p></header>
+<div class="wrap">
+<section class="card">
+  <div class="controls">
+    <div class="field"><label>Месяц</label><input id="month" type="month"></div>
+    <button class="primary" onclick="generate()">Сформировать график</button>
+    <button class="secondary" onclick="validate()">Проверить покрытие</button>
+    <button class="secondary" onclick="downloadCSV()">Скачать CSV</button>
+    <button class="secondary" onclick="window.print()">Печать</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="legend">
+    <span class="badge s8">08–17</span><span class="badge s9">09–18</span><span class="badge s12">12–21</span>
+    <span class="badge off">В — выходной</span><span class="badge vac">О — отпуск/отсутствие</span>
+  </div>
+</section>
+
+<section class="card">
+ <div class="section-title"><h2>Сотрудники</h2><span class="hint">Отметьте должность. Старшие формируются отдельно.</span></div>
+ <div class="form-grid">
+  <input id="empName" type="text" placeholder="Ф. И. О.">
+  <select id="empRegion"><option>Актобе</option><option>Актау</option><option>Кызылорда</option><option>Другое</option></select>
+  <select id="empRole"><option value="operator">Оператор</option><option value="senior">Старший сотрудник</option></select>
+  <button class="primary" onclick="addEmployee()">Добавить</button>
+ </div>
+ <div class="employee-list" id="employees"></div>
+</section>
+
+<section class="card">
+ <div class="section-title"><h2>Операторы</h2><span class="hint">Клик по ячейке — смена → выходной. Перерыв назначается автоматически.</span></div>
+ <div class="table-wrap"><table class="schedule" id="operatorTable"></table></div>
+</section>
+
+<section class="card">
+ <div class="section-title"><h2>Старшие сотрудники</h2><span class="hint">08–17 · 10–19 · 12–21. Клик по ячейке — смена → выходной.</span></div>
+ <div class="table-wrap"><table class="schedule" id="seniorTable"></table></div>
+</section>
+
+<section class="card"><div class="section-title"><h2>Контроль покрытия</h2><span class="hint">Цель: 08–12 — 2–3 сотрудника; 12–21 — 3–4. Обед учитывается как перерыв.</span></div><div id="validation" class="hint">Нажмите «Проверить покрытие».</div></section>
+<footer>Данные сохраняются в браузере автоматически. Сайт работает локально и не отправляет график на сервер.</footer>
+</div>
+
+<dialog id="dlg"><div class="modal"><h3 id="dlgTitle">Выбор смены</h3><div class="shift-grid" id="shiftGrid"></div><button class="secondary" style="margin-top:10px" onclick="dlg.close()">Закрыть</button></div></dialog>
+
+<script>
+const OP_SHIFTS=[
+ {id:'S8',label:'08:00–17:00',short:'08–17',class:'s8', lunches:['12:00–13:00','12:30–13:30']},
+ {id:'S9',label:'09:00–18:00',short:'09–18',class:'s9', lunches:['13:00–14:00','13:30–14:30']},
+ {id:'S12',label:'12:00–21:00',short:'12–21',class:'s12', lunches:['16:00–17:00','16:30–17:30','17:00–18:00']}
+];
+const SR_SHIFTS=[
+ {id:'S8',label:'08:00–17:00',short:'08–17',class:'s8'},
+ {id:'S10',label:'10:00–19:00',short:'10–19',class:'s9'},
+ {id:'S12',label:'12:00–21:00',short:'12–21',class:'s12'}
+];
+const defaultEmployees=[
+['Апетова А.','Кызылорда','operator'],['Ниязбаева Г.','Кызылорда','operator'],
+['Батырбекова Б.','Актау','operator'],['Жылқыбаев К.','Кызылорда','operator'],
+['Булайчиков И.','Кызылорда','operator'],['Ермекбаев Ж.','Актобе','operator'],
+['Сулейменова А.','Актобе','operator'],['Сыдыкова Г.','Актобе','operator'],
+['Нурсейтова Д.','Актобе','operator'],['Пусирманов Д.','Актобе','operator'],
+['Семезбаев И.','Актобе','operator'],['Тулегенова Э.С.','Актобе','operator']
+].map((x,i)=>({id:i+1,name:x[0],region:x[1],role:x[2]}));
+
+let employees=JSON.parse(localStorage.getItem('staff_schedule_employees')||'null')||defaultEmployees;
+let schedule=JSON.parse(localStorage.getItem('staff_schedule_data')||'{}');
+let activeEdit=null;
+const monthEl=document.getElementById('month');
+const now=new Date(); monthEl.value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+
+function save(){localStorage.setItem('staff_schedule_employees',JSON.stringify(employees));localStorage.setItem('staff_schedule_data',JSON.stringify(schedule));}
+function daysInMonth(){const [y,m]=monthEl.value.split('-').map(Number);return new Date(y,m,0).getDate()}
+function key(d){return `${monthEl.value}-${String(d).padStart(2,'0')}`}
+function weekday(d){const [y,m]=monthEl.value.split('-').map(Number);return new Date(y,m-1,d).getDay()}
+function isWorkday(d){const w=weekday(d);return w>=1&&w<=5}
+function initDayData(d){
+ const k=key(d); if(!schedule[k]) schedule[k]={};
+ if(!schedule[k].operators) schedule[k].operators={};
+ if(!schedule[k].seniors) schedule[k].seniors={};
+}
+function generate(){
+ for(let d=1;d<=daysInMonth();d++){initDayData(d);if(!isWorkday(d))continue;
+  const ops=employees.filter(e=>e.role==='operator');
+  // Balanced repeating pattern: 2 early, 1 middle, 1 late = 4 operators/day.
+  ops.forEach((e,i)=>{
+    const pattern=(i+d-1)%ops.length;
+    let sh=null;
+    if(pattern<2)sh='S8'; else if(pattern===2)sh='S9'; else if(pattern===3)sh='S12';
+    schedule[key(d)].operators[e.id]=sh;
+  });
+  const sr=employees.filter(e=>e.role==='senior');
+  sr.forEach((e,i)=>schedule[key(d)].seniors[e.id]=SR_SHIFTS[(i+d-1)%3].id);
+ }
+ save(); render(); validate();
+}
+function addEmployee(){
+ const name=document.getElementById('empName').value.trim();if(!name)return;
+ employees.push({id:Date.now(),name,region:document.getElementById('empRegion').value,role:document.getElementById('empRole').value});
+ document.getElementById('empName').value='';save();render();
+}
+function removeEmployee(id){employees=employees.filter(e=>e.id!==id);for(const k in schedule){delete schedule[k].operators?.[id];delete schedule[k].seniors?.[id]}save();render();validate()}
+function renderEmployees(){
+ document.getElementById('employees').innerHTML=employees.map(e=>`<div class="emp"><b>${esc(e.name)}</b><span class="small">${e.region} · ${e.role==='senior'?'старший':'оператор'}</span><button onclick="removeEmployee(${e.id})">×</button></div>`).join('');
+}
+function render(){renderEmployees();renderTable('operatorTable','operator',OP_SHIFTS);renderTable('seniorTable','senior',SR_SHIFTS);updateStats()}
+function renderTable(id,role,shifts){
+ const list=employees.filter(e=>e.role===role), days=daysInMonth();
+ let h='<thead><tr><th class="num">№</th><th class="name">Ф. И. О.</th>';
+ for(let d=1;d<=days;d++){const w=weekday(d);h+=`<th class="${w===0||w===6?'weekend':''}">${d}<br><span class="small">${['вс','пн','вт','ср','чт','пт','сб'][w]}</span></th>`}h+='</tr></thead><tbody>';
+ list.forEach((e,i)=>{h+=`<tr><td class="num">${i+1}</td><td class="name"><b>${esc(e.name)}</b><br><span class="small">${esc(e.region)}</span></td>`;
+  for(let d=1;d<=days;d++){const w=weekday(d),v=schedule[key(d)]?.[role+'s']?.[e.id]||null;
+   let sh=shifts.find(x=>x.id===v); let content=w===0||w===6?'<div class="cell off"><strong>В</strong></div>':sh?`<div class="cell ${sh.class}"><strong>${sh.short}</strong>${role==='operator'?`<small>${lunchFor(e.id,d,sh)}</small>`:''}</div>`:`<div class="cell off"><strong>В</strong></div>`;
+   h+=`<td class="${w===0||w===6?'weekend':''}" onclick="editCell('${role}',${e.id},${d})">${content}</td>`;
+  }h+='</tr>';});
+ h+='</tbody>';document.getElementById(id).innerHTML=h;
+}
+function lunchFor(empId,d,sh){const k=key(d),x=schedule[k].operators[empId+'_lunch']; if(x)return x; return sh.lunches[(empId+d)%sh.lunches.length]}
+function editCell(role,id,d){
+ if(!isWorkday(d))return; activeEdit={role,id,d};const shifts=role==='operator'?OP_SHIFTS:SR_SHIFTS;
+ document.getElementById('dlgTitle').textContent=`${employees.find(e=>e.id===id)?.name} · ${d}.${monthEl.value.slice(5)}`;
+ const grid=document.getElementById('shiftGrid');grid.innerHTML=shifts.map(s=>`<button class="shift-btn" onclick="setShift('${s.id}')"><b>${s.label}</b><br><span class="small">${role==='operator'?s.lunches.join(' · '):'смена старшего'}</span></button>`).join('')+
+ `<button class="shift-btn danger" onclick="setShift(null)"><b>Выходной</b><br><span class="small">не назначать смену</span></button>`;
+ dlg.showModal();
+}
+function setShift(v){
+ const {role,id,d}=activeEdit;initDayData(d);schedule[key(d)][role+'s'][id]=v;
+ if(role==='operator' && !v)delete schedule[key(d)].operators[id+'_lunch'];
+ save();dlg.close();render();validate();
+}
+function coverage(d){
+ const active=[];for(const e of employees.filter(e=>e.role==='operator')){const v=schedule[key(d)]?.operators?.[e.id];if(v)active.push({e,v})}
+ const intervals=[['08:00','09:00'],['09:00','12:00'],['12:00','16:00'],['16:00','17:00'],['17:00','18:00'],['18:00','21:00']];
+ return intervals.map(([a,b])=>{
+   let n=0;active.forEach(x=>{const sh=OP_SHIFTS.find(s=>s.id===x.v);if(!sh)return;
+    const [st,en]=sh.label.split('–').map(t=>t.replace(':',''));
+    if(time(a)>=time(st) && time(b)<=time(en)){
+      const lunch=lunchFor(x.e.id,d,sh); const [ls,le]=lunch.split('–');
+      if(!(time(a)<time(le)&&time(b)>time(ls)))n++;
+    }
+   });return {a,b,n};
+ });
+}
+function time(s){const [h,m]=s.split(':').map(Number);return h*60+m}
+function validate(){
+ const days=[];for(let d=1;d<=daysInMonth();d++)if(isWorkday(d)){
+   const c=coverage(d);c.forEach(x=>{const target=(time(x.a)<720)?[2,3]:[3,4];if(x.n<target[0]||x.n>target[1])days.push(`${d}.${monthEl.value.slice(5)} ${x.a}–${x.b}: ${x.n} чел. (норма ${target[0]}–${target[1]})`)});
+ }
+ const el=document.getElementById('validation');el.innerHTML=days.length?`<div class="errors"><b>Есть отклонения:</b><ul>${days.slice(0,30).map(x=>`<li>${x}</li>`).join('')}</ul>${days.length>30?`<span>Показаны первые 30.</span>`:''}</div>`:`<div class="ok">Покрытие по заданным интервалам соответствует норме.</div>`;
+}
+function updateStats(){
+ const work=Array.from({length:daysInMonth()},(_,i)=>i+1).filter(isWorkday).length;
+ const ops=employees.filter(e=>e.role==='operator').length,sr=employees.filter(e=>e.role==='senior').length;
+ document.getElementById('stats').innerHTML=`<div class="stat">Рабочих дней: <b>${work}</b></div><div class="stat">Операторов: <b>${ops}</b></div><div class="stat">Старших: <b>${sr}</b></div><div class="stat">Период: <b>${monthEl.value.slice(0,7)}</b></div>`;
+}
+function downloadCSV(){
+ const days=daysInMonth();let rows=[['Должность','Регион','Ф.И.О.',...Array.from({length:days},(_,i)=>i+1)]];
+ employees.forEach(e=>{const row=[e.role==='senior'?'Старший':'Оператор',e.region,e.name];for(let d=1;d<=days;d++){const v=schedule[key(d)]?.[e.role+'s']?.[e.id];const sh=(e.role==='senior'?SR_SHIFTS:OP_SHIFTS).find(x=>x.id===v);row.push(sh?sh.label:(isWorkday(d)?'В':'В'))}rows.push(row)});
+ const csv=rows.map(r=>r.map(x=>`"${String(x??'').replaceAll('"','""')}"`).join(';')).join('\\n');
+ const blob=new Blob(['\\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`График_${monthEl.value}.csv`;a.click();URL.revokeObjectURL(a.href);
+}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+monthEl.addEventListener('change',()=>{render();validate()});
+render();
+</script>
+</body></html>
